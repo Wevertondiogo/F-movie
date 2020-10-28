@@ -1,0 +1,50 @@
+<div class="container-form">
+  <form [formGroup]="signIn" (ngSubmit)="sendSignIn()">
+    <h2>Login to your account</h2>
+    <br />
+    <div class="align-form">
+      <label>Email Address *</label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="emailSignIn" />
+
+        <!-- TRATAMENTO DE ERROS -->
+
+        <mat-error *ngIf="requiredEmailSignIn">Email is required</mat-error>
+
+        <mat-error *ngIf="invalidationErrorMessageEmailSignIn"
+          >Email invalid</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="align-form">
+      <label>Password *</label>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          maxlength="12"
+          formControlName="passwordSignIn"
+          type="password"
+        />
+
+        <!-- TRATAMENTO DE ERROS -->
+
+        <mat-error *ngIf="requiredPasswordSignIn"
+          >Password is required</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <button
+      type="submit"
+      mat-stroked-button
+      class="btn"
+      [disabled]="signIn.invalid"
+    >
+      Login
+    </button>
+    <div class="register">
+      Don't have an account? <a href="#" routerLink="/sign-up">Register</a>
+    </div>
+  </form>
+</div>

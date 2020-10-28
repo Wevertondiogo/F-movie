@@ -1,0 +1,83 @@
+<div class="container-form">
+  <form [formGroup]="signUp" (ngSubmit)="sendSignUp()">
+    <h2>Sign up to your account</h2>
+    <br />
+    <div class="align-form">
+      <label>Your Name *</label>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          formControlName="nameSignUp"
+          maxlength="100"
+        />
+        <!-- TRATAMENTO DE ERROS -->
+        <mat-error *ngIf="requiredNameSignUp">Name is required</mat-error>
+
+        <mat-error *ngIf="errorNameMinLength"
+          >Minimum of characters is 3</mat-error
+        >
+      </mat-form-field>
+
+      <label>Your email *</label>
+      <mat-form-field appearance="outline">
+        <input type="text" matInput formControlName="emailSignUp" />
+
+        <!-- TRATAMENTO DE ERROS -->
+
+        <mat-error *ngIf="requiredEmailSignUp">Email is required</mat-error>
+
+        <mat-error *ngIf="invalidationErrorMessageEmailSignUp"
+          >Email invalid</mat-error
+        >
+      </mat-form-field>
+
+      <label>Your password *</label>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          formControlName="passwordSignUp"
+          maxlength="12"
+        />
+
+        <!-- TRATAMENTO DE ERROS -->
+
+        <mat-error *ngIf="requiredPasswordSignUp"
+          >Password Is required</mat-error
+        >
+
+        <mat-error *ngIf="errorPasswordSignUpMinLength"
+          >Minimum of characters is 3</mat-error
+        >
+      </mat-form-field>
+
+      <label>Confirm your password *</label>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          formControlName="confirmPassword"
+          maxlength="12"
+        />
+
+        <mat-error *ngIf="requiredConfirmPassword"
+          >Confirm password is required</mat-error
+        >
+
+        <mat-error *ngIf="confirmPassword">Password is not match</mat-error>
+      </mat-form-field>
+    </div>
+    <button
+      type="submit"
+      mat-stroked-button
+      class="btn"
+      [disabled]="signUp.invalid"
+    >
+      Sign Up
+    </button>
+    <div class="register">
+      Already have an account? <a href="#" routerLink="/login">Sign in</a>
+    </div>
+  </form>
+</div>

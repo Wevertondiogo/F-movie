@@ -1,0 +1,12 @@
+// PLACEHOLDER
+%d-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  @extend %d-center;
+  flex-direction: column;
+  min-height: 100vh;
+}
