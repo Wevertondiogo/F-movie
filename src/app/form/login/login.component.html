@@ -15,6 +15,8 @@
           >Email invalid</mat-error
         >
       </mat-form-field>
+
+      <p *ngIf="errorMessage !== ''" class="errorMessage">{{ errorMessage }}</p>
     </div>
 
     <div class="align-form">
@@ -31,7 +33,12 @@
         <!-- TRATAMENTO DE ERROS -->
 
         <mat-error *ngIf="requiredPassword">Password is required</mat-error>
+
+        <mat-error *ngIf="errorPasswordMinLength"
+          >Minimum of characters is 6</mat-error
+        >
       </mat-form-field>
+      <p *ngIf="errorMessage !== ''" class="errorMessage">{{ errorMessage }}</p>
     </div>
     <button
       type="submit"
@@ -39,7 +46,8 @@
       class="btn"
       [disabled]="signIn.invalid"
     >
-      Login
+      <p *ngIf="!isLoading">Sign Up</p>
+      <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
     </button>
     <div class="register">
       Don't have an account? <a href="#" routerLink="/sign-up">Register</a>

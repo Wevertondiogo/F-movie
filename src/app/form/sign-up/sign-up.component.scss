@@ -1,66 +1,10 @@
-// PLACEHOLDER
-%d-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.container-form {
-  @extend %d-center;
-  flex-direction: column;
-  min-height: 100vh;
-  form {
-    @extend %d-center;
-    flex-direction: column;
-    background-color: #f5f7f8;
-    width: 80%;
-    padding: 40px 0;
-    h2 {
-      font-size: 2rem;
-      color: #000000b7;
-    }
-    .align-form {
-      width: 80%;
-      label {
-        color: #000000b7;
-      }
-      mat-form-field {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin: 6px auto;
-      }
-    }
-    .btn {
-      @extend %d-center;
-      margin: 12px auto;
-      width: 80%;
-      padding: 6px;
-      background-color: #478ccc;
-      color: #fff;
-      &:disabled {
-        opacity: 0.5;
-      }
-      p {
-        margin: 0;
-      }
-    }
-    .register {
-      margin-top: 15px;
-      a {
-        color: #478ccc;
-        text-decoration: none;
-      }
-    }
-    .errorMessage {
-      position: relative;
-      bottom: 15px;
-      margin: 0;
-      color: red;
+form {
+  padding: 40px 0;
+  .login {
+    margin-top: 15px;
+    a {
+      color: #478ccc;
+      text-decoration: none;
     }
   }
-}
-
-:host ::ng-deep .mat-progress-spinner circle,
-.mat-spinner circle {
-  stroke: #1a82e4;
 }
