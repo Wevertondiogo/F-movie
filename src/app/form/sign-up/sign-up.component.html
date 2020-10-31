@@ -5,14 +5,9 @@
     <div class="align-form">
       <label>Your Name *</label>
       <mat-form-field appearance="outline">
-        <input
-          type="text"
-          matInput
-          formControlName="nameSignUp"
-          maxlength="100"
-        />
+        <input type="text" matInput formControlName="name" maxlength="100" />
         <!-- TRATAMENTO DE ERROS -->
-        <mat-error *ngIf="requiredNameSignUp">Name is required</mat-error>
+        <mat-error *ngIf="requiredName">Name is required</mat-error>
 
         <mat-error *ngIf="errorNameMinLength"
           >Minimum of characters is 3</mat-error
@@ -21,41 +16,40 @@
 
       <label>Your email *</label>
       <mat-form-field appearance="outline">
-        <input type="text" matInput formControlName="emailSignUp" />
+        <input type="text" matInput formControlName="email" />
 
         <!-- TRATAMENTO DE ERROS -->
 
-        <mat-error *ngIf="requiredEmailSignUp">Email is required</mat-error>
+        <mat-error *ngIf="requiredEmail">Email is required</mat-error>
 
-        <mat-error *ngIf="invalidationErrorMessageEmailSignUp"
+        <mat-error *ngIf="invalidationErrorMessageEmail"
           >Email invalid</mat-error
         >
       </mat-form-field>
+      <p *ngIf="errorEmail !== ''" class="errorMessage">{{ errorEmail }}</p>
 
       <label>Your password *</label>
       <mat-form-field appearance="outline">
         <input
-          type="text"
+          type="password"
           matInput
-          formControlName="passwordSignUp"
+          formControlName="password"
           maxlength="12"
         />
 
         <!-- TRATAMENTO DE ERROS -->
 
-        <mat-error *ngIf="requiredPasswordSignUp"
-          >Password Is required</mat-error
-        >
+        <mat-error *ngIf="requiredPassword">Password Is required</mat-error>
 
-        <mat-error *ngIf="errorPasswordSignUpMinLength"
-          >Minimum of characters is 3</mat-error
+        <mat-error *ngIf="errorPasswordMinLength"
+          >Minimum of characters is 6</mat-error
         >
       </mat-form-field>
 
       <label>Confirm your password *</label>
       <mat-form-field appearance="outline">
         <input
-          type="text"
+          type="password"
           matInput
           formControlName="confirmPassword"
           maxlength="12"
@@ -74,7 +68,8 @@
       class="btn"
       [disabled]="signUp.invalid"
     >
-      Sign Up
+      <p *ngIf="!isLoading">Sign Up</p>
+      <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
     </button>
     <div class="register">
       Already have an account? <a href="#" routerLink="/login">Sign in</a>

@@ -31,6 +31,7 @@
       }
     }
     .btn {
+      @extend %d-center;
       margin: 12px auto;
       width: 80%;
       padding: 6px;
@@ -38,6 +39,9 @@
       color: #fff;
       &:disabled {
         opacity: 0.5;
+      }
+      p {
+        margin: 0;
       }
     }
     .register {
@@ -47,5 +51,16 @@
         text-decoration: none;
       }
     }
+    .errorMessage {
+      position: relative;
+      bottom: 15px;
+      margin: 0;
+      color: red;
+    }
   }
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #1a82e4;
 }

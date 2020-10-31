@@ -1,3 +1,4 @@
+import { UserDataService } from './../../shared/user-data.service';
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,36 +10,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   signIn: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _userService: UserDataService) {}
 
   createSignIn() {
     this.signIn = this.fb.group({
-      emailSignIn: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      passwordSignIn: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required])],
     });
   }
 
   ngOnInit(): void {
     this.createSignIn();
-    console.log('i am here!');
+
+    this._userService
+      .getAll()
+      .subscribe((snapshot) => snapshot.forEach((user) => console.log(user)));
   }
 
-  sendSignIn(): void {
-    console.log(this.signIn);
+  login(): void {
+    const email = this.signIn.get('email').value;
+    const password = this.signIn.get('password').value;
+
+    this._userService.verifyEmailAndPassword(email, password);
   }
 
   // HANDLING OF SING IN ERRORS
 
-  get requiredEmailSignIn() {
-    const controller = this.signIn.get('emailSignIn');
+  get requiredEmail() {
+    const controller = this.signIn.get('email');
     return controller.invalid && controller.errors.required;
   }
 
-  get invalidationErrorMessageEmailSignIn() {
-    const controller = this.signIn.get('emailSignIn');
+  get invalidationErrorMessageEmail() {
+    const controller = this.signIn.get('email');
     return (
       controller.invalid &&
       (controller.dirty || controller.touched) &&
@@ -46,8 +50,8 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  get requiredPasswordSignIn() {
-    const controller = this.signIn.get('passwordSignIn');
+  get requiredPassword() {
+    const controller = this.signIn.get('password');
     return controller.invalid && controller.errors.required;
   }
 }

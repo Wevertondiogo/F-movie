@@ -1,17 +1,17 @@
 <div class="container-form">
-  <form [formGroup]="signIn" (ngSubmit)="sendSignIn()">
+  <form [formGroup]="signIn" (ngSubmit)="login()">
     <h2>Login to your account</h2>
     <br />
     <div class="align-form">
       <label>Email Address *</label>
       <mat-form-field appearance="outline">
-        <input type="text" matInput formControlName="emailSignIn" />
+        <input type="text" matInput formControlName="email" />
 
         <!-- TRATAMENTO DE ERROS -->
 
-        <mat-error *ngIf="requiredEmailSignIn">Email is required</mat-error>
+        <mat-error *ngIf="requiredEmail">Email is required</mat-error>
 
-        <mat-error *ngIf="invalidationErrorMessageEmailSignIn"
+        <mat-error *ngIf="invalidationErrorMessageEmail"
           >Email invalid</mat-error
         >
       </mat-form-field>
@@ -24,15 +24,13 @@
           type="text"
           matInput
           maxlength="12"
-          formControlName="passwordSignIn"
+          formControlName="password"
           type="password"
         />
 
         <!-- TRATAMENTO DE ERROS -->
 
-        <mat-error *ngIf="requiredPasswordSignIn"
-          >Password is required</mat-error
-        >
+        <mat-error *ngIf="requiredPassword">Password is required</mat-error>
       </mat-form-field>
     </div>
     <button
