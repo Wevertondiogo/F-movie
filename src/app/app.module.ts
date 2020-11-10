@@ -6,16 +6,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormModule } from './form/form.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent],
+    AppComponent,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
 
-    FormModule
+    FormModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

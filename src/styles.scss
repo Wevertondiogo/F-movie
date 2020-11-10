@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-$main-bg: #5e99d1;
-
+@import "utils/styles/variable";
+@import "utils/styles/placeholders";
 html,
 body {
   height: 100%;
@@ -11,13 +11,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $main-bg;
 
-  // PLACEHOLDER
-  %d-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .container-form {
     @extend %d-center;
     flex-direction: column;
@@ -25,17 +18,17 @@ body {
     form {
       @extend %d-center;
       flex-direction: column;
-      background-color: #f5f7f8;
+      background-color: $main-sub-color;
       width: 80%;
       padding: 50px 20px;
       h2 {
         font-size: 2rem;
-        color: #000000b7;
+        color: $text;
       }
       .align-form {
         width: 80%;
         label {
-          color: #000000b7;
+          color: $text;
         }
         mat-form-field {
           width: 100%;
@@ -49,7 +42,7 @@ body {
         margin: 12px auto;
         width: 80%;
         padding: 6px;
-        background-color: #478ccc;
+        background-color: $btn;
         color: #fff;
         &:disabled {
           opacity: 0.5;
@@ -63,7 +56,7 @@ body {
         position: relative;
         bottom: 15px;
         margin: 0;
-        color: red;
+        color: $error-message;
       }
     }
   }

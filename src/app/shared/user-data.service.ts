@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user.model';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class UserDataService {
 
   listRef = this.db.list('users');
 
-  constructor(private db: AngularFireDatabase, private auth: AngularFireAuth) {}
+  constructor(private db: AngularFireDatabase, private auth: AngularFireAuth,  private router: Router) {}
 
   delete() {
     this.listRef.remove().then(() => console.log('ok'));
@@ -32,20 +33,20 @@ export class UserDataService {
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         this.loading(false)
-        console.log('Cadastro efetuado com sucesso!')
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.loading(false);
         this.handleEmailRepeat(error.message);
       });
-  }
-
+    }
+    
   verifyEmailAndPassword(email: string, password: string) {
     this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.loading(false)
-        console.log('Login efetuado com sucesso!')
+    .signInWithEmailAndPassword(email, password)
+    .then(() => {
+      this.loading(false)
+      this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.handleErrorMessage(error.message);

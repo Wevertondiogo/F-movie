@@ -1,0 +1,14 @@
+@import "../../../utils/styles/variable";
+.toolbar {
+  padding: 35px;
+  background-color: $main-sub-color;
+  span {
+    font: {
+      size: 2.2rem;
+      style: italic;
+    }
+    &:first-child {
+      color: $btn;
+    }
+  }
+}

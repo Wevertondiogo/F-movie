@@ -1,6 +1,8 @@
+import { key } from './../app/home/home.api';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+
 
 export const environment = {
   production: false,
@@ -14,6 +16,7 @@ export const environment = {
     appId: '1:355439228377:web:c85b7c5cef6a03fba195c8',
     measurementId: 'G-8YG6X4S3LG',
   },
+  url: `https://api.themoviedb.org/3/trending/all/day?api_key=${key}`
 };
 
 /*

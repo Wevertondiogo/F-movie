@@ -1,3 +1,4 @@
+import { HomeComponent } from './../home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -8,6 +9,7 @@ import { SignUpComponent } from './../form/sign-up/sign-up.component';
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
+  {path: 'home', component: HomeComponent},
   { path: '**', redirectTo: '/sign-up', pathMatch: 'full' },
 ];
 

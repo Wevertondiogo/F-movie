@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
+
 import { ValidatorsComponent } from './password-match.component';
 import { User } from './../../shared/user.model';
 import { UserDataService } from './../../shared/user-data.service';
@@ -14,7 +15,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   errorEmail: string;
   userData: any;
-  constructor(private fb: FormBuilder, private _userService: UserDataService) {}
+  constructor(private fb: FormBuilder, private _userService: UserDataService,) {}
 
   createSignUp() {
     this.signUp = this.fb.group(
