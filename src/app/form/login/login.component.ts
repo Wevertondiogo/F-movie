@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._userService.obsLoading.subscribe((load) => (this.isLoading = load));
   }
   ngOnDestroy(): void {
-    // this._userService.getAll().subscribe().unsubscribe();
+    this._userService.getAll().subscribe().unsubscribe();
   }
   login(): void {
     this.isLoading = true;

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take } from 'rxjs/operators';
-import { ValidatorsComponent } from './../validators.component';
+import { ValidatorsComponent } from './password-match.component';
 import { User } from './../../shared/user.model';
 import { UserDataService } from './../../shared/user-data.service';
 @Component({
@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   signUp: FormGroup;
   isLoading: boolean;
   errorEmail: string;
-  fodas: boolean = true;
+  userData: any;
   constructor(private fb: FormBuilder, private _userService: UserDataService) {}
 
   createSignUp() {
@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         ],
         confirmPassword: ['', Validators.compose([Validators.required])],
       },
-      { validator: ValidatorsComponent.passwordsMatch }
+      { validator: ValidatorsComponent.passwordMatch }
     );
   }
 
@@ -50,7 +50,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
   sendSignUp(): void {
     this.isLoading = true;
-    let userData;
+    
     const email = this.signUp.get('email').value;
     const password = this.signUp.get('password').value;
     this._userService.createEmailAndPassword(email, password);
@@ -59,19 +59,24 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .getAll()
       .pipe(take(1))
       .subscribe((users: User[]) => {
-        for (let user of users) {
-          if (user.email === email) {
-            userData = '';
-            break;
-          } else userData = this.signUp.value;
-        }
-
-        if (userData) this._userService.insert(userData);
+        this.searchEmail(users, email);
+        if (this.userData) this._userService.insert(this.userData);
         // this.signUp.reset();
       });
   }
-  errorEmailMessage(errorMessage: string) {
+  errorEmailMessage(errorMessage: string): void {
     if (errorMessage.includes('email')) this.errorEmail = errorMessage;
+  }
+
+  searchEmail(users: User[], email: string): void
+  {
+    for (let user of users) {
+          if (user.email === email) {
+            this.userData = '';
+            break;
+          } else this.userData = this.signUp.value;
+        }
+
   }
 
   // HANDLING ERRORS
