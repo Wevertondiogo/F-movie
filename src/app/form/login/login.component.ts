@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createSignIn();
     this._userService.obsLoading.subscribe((load) => (this.isLoading = load));
+     const body = document.querySelector('body');
+    body.addEventListener('keypress', event=> {
+    if(event.key === "Enter") this.login();
+  })
   }
   ngOnDestroy(): void {
     this._userService.getAll().subscribe().unsubscribe();

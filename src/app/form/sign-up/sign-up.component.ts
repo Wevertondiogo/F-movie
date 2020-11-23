@@ -15,7 +15,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   errorEmail: string;
   userData: any;
-  constructor(private fb: FormBuilder, private _userService: UserDataService,) {}
+  constructor(private fb: FormBuilder, private _userService: UserDataService) {}
 
   createSignUp() {
     this.signUp = this.fb.group(
@@ -44,6 +44,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this._userService.obsEmailError.subscribe((errorMessage) =>
       this.errorEmailMessage(errorMessage)
     );
+  const body = document.querySelector('body');
+  body.addEventListener('keypress', event=> {
+    if(event.key === "Enter") this.sendSignUp();
+  })
+  
     // this._userService.delete();
   }
   ngOnDestroy(): void {
@@ -77,8 +82,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
             break;
           } else this.userData = this.signUp.value;
         }
-
   }
+
+
 
   // HANDLING ERRORS
 

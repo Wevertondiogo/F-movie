@@ -1,3 +1,4 @@
+import { key } from './../app/home/key.api';
 export const environment = {
   production: true,
   firebaseConfig: {
@@ -10,4 +11,6 @@ export const environment = {
     appId: '1:355439228377:web:c85b7c5cef6a03fba195c8',
     measurementId: 'G-8YG6X4S3LG',
   },
+  url: `https://api.themoviedb.org/3/movie/popular?api_key=${key}`
+
 };

@@ -8,10 +8,9 @@ import { HomeService } from './../shared/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private HomeService: HomeService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.HomeService.getMovie().subscribe(action=> console.log(action))
   }
 
 }
