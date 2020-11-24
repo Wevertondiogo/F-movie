@@ -1,8 +1,8 @@
 <div class="card-group">
 
-  <mat-card class="card" *ngFor="let movie of movies" (click)="viewInfo(card)" #card >
+  <mat-card class="card" *ngFor="let movie of movies" (click)="sendRoute(movie.id)"  >
     <mat-card-header class="card-header">
-      <mat-card-title class="card-header-title">{{movie.title}}</mat-card-title>
+      <mat-card-title class="card-header-title" >{{movie.title}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Photo of a Shiba Inu">
     <mat-card-content>

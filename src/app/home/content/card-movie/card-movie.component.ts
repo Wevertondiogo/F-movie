@@ -16,16 +16,12 @@ export class CardMovieComponent implements OnInit {
   constructor(private homeService: HomeService, private router: Router,) { }
 
   ngOnInit(): void {
-    this.homeService.getMovie().subscribe(movies => {
-      console.log(movies.results)
-      this.movies = movies.results
-    })
+    this.homeService.getMovie().subscribe(movies => this.movies = movies.results);
   }
 
-  viewInfo(card): void
+  sendRoute(id: number): void
   {
-    const title: string = card.__ngContext__[29];
-    this.router.navigate([`home/view-info/${title}`])
+    this.router.navigate([`home/view-info/${id}`]);
   }
 
 }
