@@ -12,11 +12,15 @@ import { SignUpComponent } from './../form/sign-up/sign-up.component';
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, children: [
-    {path: '', component: CardMovieComponent},
-    {path: 'view-info/:id', component: ViewInfoComponent}
-  ]},
-  // { path: '**', redirectTo: '/sign-up', pathMatch: 'full' },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      { path: '', component: CardMovieComponent },
+      { path: 'view-info/:id', component: ViewInfoComponent },
+    ],
+  },
+  { path: '**', redirectTo: '/sign-up', pathMatch: 'full' },
 ];
 
 @NgModule({

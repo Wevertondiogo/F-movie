@@ -1,3 +1,4 @@
+import { HomeService } from './home.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -10,15 +11,22 @@ import { Router } from '@angular/router';
 })
 export class UserDataService {
   private isLoading = new BehaviorSubject<boolean>(false);
-  private emailError = new BehaviorSubject<string>('');
-  private errorMessage = new BehaviorSubject<string>('');
   obsLoading = this.isLoading.asObservable();
+  private emailError = new BehaviorSubject<string>('');
   obsEmailError = this.emailError.asObservable();
+  private errorMessage = new BehaviorSubject<string>('');
   obsErrorMessage = this.errorMessage.asObservable();
+  private emailLogin = new BehaviorSubject<string>('');
+  obsEmailLogin = this.emailLogin.asObservable();
 
   listRef = this.db.list('users');
 
-  constructor(private db: AngularFireDatabase, private auth: AngularFireAuth,  private router: Router) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private auth: AngularFireAuth,
+    private router: Router,
+    private homeService: HomeService
+  ) {}
 
   delete() {
     this.listRef.remove().then(() => console.log('ok'));
@@ -32,21 +40,23 @@ export class UserDataService {
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.loading(false)
+        this.loading(false);
+        // this.homeService.setNameAndEmail(name, email);
         this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.loading(false);
         this.handleEmailRepeat(error.message);
       });
-    }
-    
+  }
+
   verifyEmailAndPassword(email: string, password: string) {
     this.auth
-    .signInWithEmailAndPassword(email, password)
-    .then(() => {
-      this.loading(false)
-      this.router.navigate(['/home']);
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.loading(false);
+
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         this.handleErrorMessage(error.message);
@@ -65,5 +75,9 @@ export class UserDataService {
   }
   loading(load: boolean) {
     return this.isLoading.next(load);
+  }
+
+  getEmailLogin(email: string) {
+    return this.emailLogin.next(email);
   }
 }

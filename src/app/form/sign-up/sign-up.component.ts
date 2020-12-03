@@ -44,11 +44,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this._userService.obsEmailError.subscribe((errorMessage) =>
       this.errorEmailMessage(errorMessage)
     );
-  const body = document.querySelector('body');
-  body.addEventListener('keypress', event=> {
-    if(event.key === "Enter") this.sendSignUp();
-  })
-  
+    const body = document.querySelector('body');
+    body.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') this.sendSignUp();
+    });
+
     // this._userService.delete();
   }
   ngOnDestroy(): void {
@@ -56,7 +56,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
   sendSignUp(): void {
     this.isLoading = true;
-    
+
+    const name = this.signUp.get('name').value;
     const email = this.signUp.get('email').value;
     const password = this.signUp.get('password').value;
     this._userService.createEmailAndPassword(email, password);
@@ -65,8 +66,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .getAll()
       .pipe(take(1))
       .subscribe((users: User[]) => {
-        this.searchEmail(users, email);
-        if (this.userData) this._userService.insert(this.userData);
+        if (this.searchEmail(users, email)) {
+          this._userService.insert(this.signUp.value);
+        }
+        console.log(this.searchEmail(users, email));
+        // console.log(this.userData);
         // this.signUp.reset();
       });
   }
@@ -74,17 +78,13 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (errorMessage.includes('email')) this.errorEmail = errorMessage;
   }
 
-  searchEmail(users: User[], email: string): void
-  {
+  searchEmail(users: User[], email: string): boolean {
     for (let user of users) {
-          if (user.email === email) {
-            this.userData = '';
-            break;
-          } else this.userData = this.signUp.value;
-        }
+      if (user.email === email) {
+        return false;
+      } else return true;
+    }
   }
-
-
 
   // HANDLING ERRORS
 
